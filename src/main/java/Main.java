@@ -9,7 +9,7 @@ public class Main {
             random = new RandomNumber(1023, 9876);
             number = random.getNumber();
         }
-        BullsAndCows bac;
+        BullsAndCowsGameController game = new BullsAndCowsGameController(number);
         int num;
         int count = 0;
         Scanner in = new Scanner(System.in);
@@ -25,8 +25,8 @@ public class Main {
                 System.out.println("You win! Game over.\nNumber of attempts: "+ count);
                 break;
             }
-            bac = new BullsAndCows(num, number);
-            bac.printBullsAndCows();
+            game = game.guess(num);
+            game.printBullsAndCows();
         }
         in.close();
     }
