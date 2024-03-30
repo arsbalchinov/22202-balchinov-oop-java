@@ -2,13 +2,14 @@ public class BullsAndCowsGameController {
     int bulls;
     int cows;
     int randNumber;
+
     public BullsAndCowsGameController(int randNum) {
         randNumber = randNum;
     }
-    public BullsAndCowsGameController guess(int num) {
-        BullsAndCowsGameController bac = new BullsAndCowsGameController(randNumber);
-        bac.bulls = 0;
-        bac.cows = 0;
+
+    public BullsAndCowsResult guess(int num) {
+        bulls = 0;
+        cows = 0;
         boolean[] numDigits = new boolean[10];
         boolean[] randomDigits = new boolean[10];
         String numStr = Integer.toString(num);
@@ -21,17 +22,18 @@ public class BullsAndCowsGameController {
             randomDigits[k] = true;
 
             if (numStr.charAt(i) == randStr.charAt(i)) {
-                bac.bulls++;
+                bulls++;
             }
         }
         for (int i = 0; i < 10; i++) {
             if (numDigits[i] && randomDigits[i]) {
-                bac.cows++;
+                cows++;
             }
         }
-        bac.cows -= bac.bulls;
-        return bac;
+        cows -= bulls;
+        return new BullsAndCowsResult(bulls, cows);
     }
+
     public void printBullsAndCows() {
         System.out.println("Bulls: "+ bulls +"\nCows: "+ cows);
     }
