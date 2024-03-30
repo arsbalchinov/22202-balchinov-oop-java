@@ -25,7 +25,7 @@ public class Main {
                 System.out.println("You win! Game over.\nNumber of attempts: "+ count);
                 break;
             }
-            game = game.guess(num);
+            BullsAndCowsResult bac = game.guess(num);
             game.printBullsAndCows();
         }
         in.close();
