@@ -80,6 +80,19 @@ public class CommandsTest {
     }
 
     @Test
+    public void sinusTest() {
+        Command command = new Sinus();
+        ctx.getStack().push(1.57079);
+        try {
+            command.execute(null, ctx);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        double res = ctx.getStack().pop();
+        assertEquals(1.0, res, 0.0001);
+    }
+
+    @Test
     public void defineTest(){
         Command command = new Define();
         String[] parameters = new String[2];
