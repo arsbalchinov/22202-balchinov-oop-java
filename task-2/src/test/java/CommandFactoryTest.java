@@ -17,6 +17,7 @@ public class CommandFactoryTest {
             assertInstanceOf(Mul.class, factory.createCommand("MUL"));
             assertInstanceOf(Div.class, factory.createCommand("DIV"));
             assertInstanceOf(Sqrt.class, factory.createCommand("SQRT"));
+            assertInstanceOf(Sinus.class, factory.createCommand("SINUS"));
         } catch (CommandException e) {
             System.out.println(e.getMessage());
         }
