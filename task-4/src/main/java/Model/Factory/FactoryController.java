@@ -11,11 +11,9 @@ import static Model.Factory.Storages.StorageMap.Type.car;
 
 public class FactoryController extends Thread {
     private final boolean log;
-
     private final StorageMap storageMap;
     private final FactoryStats stats;
     private final int orderSize;
-
     private final BlockingQueue<Runnable> orders;
 
     public FactoryController(StorageMap storageMap, Config config, int orderSize, FactoryStats stats, boolean log) {
