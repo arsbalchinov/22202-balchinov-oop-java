@@ -24,7 +24,6 @@ public class Factory implements Runnable {
     private final LinkedList<AccessoriesSupplier> accessoriesSuppliers;
 
     private final FactoryController factoryController;
-
     private final LinkedList<Dealer> dealers;
 
     public Factory(Config config, Settings settings, FactoryStats stats) {
@@ -51,10 +50,11 @@ public class Factory implements Runnable {
         }
 
         factoryController = new FactoryController(storageMap, config, 5, stats, log);
+        carStorage.setFactoryController(factoryController);
 
         dealers = new LinkedList<>();
         for (int i = 0; i < config.getDealers(); i++) {
-            dealers.add(new Dealer(factoryController, settings.getDealerSaleTime(), stats, log));
+            dealers.add(new Dealer(carStorage, settings.getDealerSaleTime(), stats, log));
         }
     }
 
