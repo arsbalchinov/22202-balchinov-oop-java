@@ -1,8 +1,8 @@
 package Model.Factory.Dealers;
 
-import Model.Factory.FactoryController;
 import Model.Factory.FactoryStats;
 import Model.Factory.Details.Car;
+import Model.Factory.Storages.CarStorage;
 import Util.IDgenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,13 +12,12 @@ public class Dealer extends Thread {
     private final boolean log;
 
     private final int id;
-
-    private final FactoryController factoryController;
+    private final CarStorage carStorage;
     private int timeToSale;
     private final FactoryStats stats;
 
-    public Dealer(FactoryController factoryController, int timeToSale, FactoryStats stats, boolean log) {
-        this.factoryController = factoryController;
+    public Dealer(CarStorage carStorage, int timeToSale, FactoryStats stats, boolean log) {
+        this.carStorage = carStorage;
         this.timeToSale = timeToSale;
         this.stats = stats;
         this.id = IDgenerator.get();
@@ -50,10 +49,7 @@ public class Dealer extends Thread {
 
     private Car orderCar() throws InterruptedException {
         sleep(timeToSale);
-        synchronized (factoryController) {
-            factoryController.notify();
-        }
-        Car car = (Car) factoryController.getCarStorage().get();
+        Car car = (Car) carStorage.get();
         stats.decreaseStoredCount(FactoryStats.DETAIL.CAR);
         return car;
     }
